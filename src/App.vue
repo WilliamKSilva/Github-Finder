@@ -3,9 +3,9 @@
     <section id="header">
       <Header />
     </section>   
-    <div id="main">
+    <main>
       <ContentContainer />
-    </div>     
+    </main>     
   </div>  
 </template>
 
@@ -40,7 +40,7 @@ body {
   padding: 0;
 }
 
-#main {
+main {
   display: flex;
   margin-top: 8rem;
 }
