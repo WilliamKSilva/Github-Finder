@@ -7,7 +7,7 @@
         </h1>
         <input 
           type="text" 
-          placeholder="Usuário a ser buscado..."
+          placeholder="Insira o nome de usuário..."          
           v-model="url"        
         />  
         <button @click="getUser">
@@ -91,18 +91,22 @@ export default {
     padding-right: 10px;
   }
 
-  .header > input {    
-    color: #00171f;
+  .header > input { 
+    color: #00171f;     
     border: 2px solid #FFFFFF;
     transition: 180ms box-shadow ease-in-out;
   }
 
-   .header > input:focus {
+  .header > input::placeholder {    
+    color: #00171f;
+  }
+
+  .header > input:focus {
     box-shadow: 0 0 0 3px #007ea7;
     outline: 3px solid transparent;
   }
 
-   .header > button {    
+  .header > button {    
     border: 0;
     border-radius: 3px;
     
@@ -118,7 +122,7 @@ export default {
     transition: 0.2s;
   }
 
-   .header > button:hover {
+  .header > button:hover {
     cursor: pointer;
     filter: brightness(0.5);
   }
