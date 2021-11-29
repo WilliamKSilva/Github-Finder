@@ -6,26 +6,28 @@
           Pesquise o perfil!
         </h1>
         <input 
-          type="text"
+          type="text" 
+          placeholder="Usuário a ser buscado..."
+          v-model="url"        
         />  
-        <button>
+        <button @click="getUser">
           Pesquisar
         </button>
       </section>
       <div class="main">
         <div class="avatar">
           <img 
-            src="https://avatars.githubusercontent.com/u/75429175?v=4" 
+            v-bind:src="data.avatar_url || 'https://cdn.iconscout.com/icon/free/png-256/account-avatar-profile-human-man-user-30448.png'" 
             alt="avatar"
             width="100"
           />
         </div> 
         <div class="profileItems">          
-          <ProfileItem title="Name:" content="William Kelvin"/>
-          <ProfileItem title="Profile Link:" content="https://github.com/WilliamKSilva"/>
-          <ProfileItem title="Location:" content="São José dos Campos"/>
-          <ProfileItem title="Company:" content="Dataside"/>
-          <ProfileItem title="Repos:" content="15"/>
+          <ProfileItem title="Name:" v-bind:content="data.name" :user="user"/>
+          <ProfileItem title="Profile Link:" v-bind:content="data.html_url"/>
+          <ProfileItem title="Location:" v-bind:content="data.location"/>
+          <ProfileItem title="Company:" v-bind:content="data.company"/>
+          <ProfileItem title="Repos:" v-bind:content="data.public_repos"/>
         </div>  
       </div>
     </div>
@@ -33,13 +35,31 @@
 </template> 
 
 <script>
+import axios from 'axios'
 import ProfileItem from './ProfileItem.vue'
 
 export default {
   name: 'ContentContainer',  
+  data() {
+    return {
+      user: String,
+      url: null, 
+      data: []
+    }
+  },
+  state: {
+    primeiro: null
+  },
   components: {
     ProfileItem
+  },   
+  methods: {
+     async getUser() {      
+      const response = await axios.get(`https://api.github.com/users/${encodeURIComponent(this.url)}`)
+      this.data = response.data;
+    }
   }
+   
 }
 </script>
 

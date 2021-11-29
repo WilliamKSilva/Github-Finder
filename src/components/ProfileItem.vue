@@ -8,12 +8,14 @@
 </template> 
 
 <script>
+
 export default {
   name: 'ProfileItem', 
   props: {
     title: String, 
     content: String,
-  }
+    user: String
+  }, 
 }
 </script>
 
